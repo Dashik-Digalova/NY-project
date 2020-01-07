@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="mt-5 mb-3"><a href="/">Назад, на главную</a></div>
+        <h2 class="р2 mb-3"><strong>{{ playlist_id }}</strong></h2>
+        <h5>{{ playlist.title }}</h5>
+     <hr/>
+    <div class="row">
+        <div class="col-8">
+            <h5>{{ video.title }}</h5>
+          <iframe width="100%" height="450" src="{{ video.videoid }}" frameborder="1" allow="picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="col-4">
+            <nav class="nav flex-column mt-4">
+                {% for video_id in playlist.videos %}
+                <a class="mb-4" href="/videos/{{ playlist_id }}/{{ videos[video_id].id }}">{{ videos[video_id].title }}</a>
+                {% endfor %}
+              <a class="nav-link " href="#"></a>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="mt-4 mb-3"><a href="/" class="btn-outline-secondary">Назад</a></div>
+    {% if search_videos|length == 0 %}
+    <h2 class="р2 mb-3"><strong>Поищем твое новогоднее настроение?</strong></h2>
+    {% else %}
+    <h2 class="р2 mb-3"><strong>Поиск: {{ search_videos|length }} результатов</strong></h2>
+    {% endif %}
+    <form action="/search" method="POST">
+    <div class="form-row">
+      <div class="col-7">
+        <input type="text" name = "s" class="form-control" placeholder="Введите слова">
+      </div>
+      <div class="col">
+        <input type="submit" class="btn btn-primary" value="Найти">
+      </div>
+        <div class="col-7">
+            <p class="mt-3 text-center">Например:
+            {% for example in playlist %}
+            <a class="mx-2" href="/videos/{{ example }}">{{ example }}</a>
+            {% endfor %}
+        </div>
+    </div>
+  </form>
+
+    {% if search_videos|length == 0 %}
+    <img src="/static/search.jpg" width="700", height="400">
+
+    {% else %}
+    {% for element in search_videos %}
+    <h2>
+        <a href="{{ element.videoid }}">{{ element.title }}</a>
+    </h2>
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
